@@ -1,4 +1,4 @@
-    import React, { use, useEffect } from 'react'
+    import React, { use, useEffect, useState } from 'react'
     import Todo_icon from '../assets/Todo_icon.png'
 import TodoItems from './TodoItems'
 
@@ -10,6 +10,7 @@ import TodoItems from './TodoItems'
 
     const inputRef=React.useRef();
 
+    const [Text,setText]=useState("")
     const add=(e)=>{
         const inputText=inputRef.current.value.trim()
         if(inputText===""){
@@ -20,7 +21,7 @@ import TodoItems from './TodoItems'
        const newTodo={id:crypto.randomUUID(),text:inputText,iscomplete:false}
 
        setTodos([...Todos,newTodo])
-       inputRef.current.value=""
+       setText("")
     
     }
 
@@ -61,7 +62,7 @@ import TodoItems from './TodoItems'
     {/*.....inputbox.....*/}
 
     <div className='my-7 flex items-center bg-gray-200 rounded-full'>
-        <input ref={inputRef} className='bg-transparent border-0 outline-none flex-1 h-14 pl-6 pr-2 placeholder:text-slate-600' type="text"  placeholder='Add a task'/>
+        <input onChange={(e)=>setText(e.target.value)} value={Text} ref={inputRef} className='bg-transparent border-0 outline-none flex-1 h-14 pl-6 pr-2 placeholder:text-slate-600' type="text"  placeholder='Add a task'/>
         <button onClick={add} className='border-none rounded-full bg-orange-600 w-32 h-14 text-white font-medium text-lg cursor-pointer'>ADD+</button>
     </div>
 
